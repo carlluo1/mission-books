@@ -12,6 +12,9 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
+path = os.path.expanduser('~/missionbooks.herokuapp.com')
+if path not in sys.path:
+    sys.path.append(path)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
 application = get_wsgi_application()

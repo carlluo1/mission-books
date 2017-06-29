@@ -27,7 +27,7 @@ SECRET_KEY = 'lv(p@hy&%o$cmw5g)y0=cp%_)q%3prf8tv+)+@o9i^snpix!9_'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'carlluo1.pythonanywhere.com']
-
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'library',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

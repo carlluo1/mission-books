@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="title">
+   		<h1>Welcome</h1>
+    	<p>Welcome to our beta book sharing website.</p>
+    	<p>Over here you can sell all of your old textbooks, as well as buy new ones you might need</p>
+    	<h1><a href="{% url 'post_list' %}">If you already have already logged in, click here</a></h1>
+    	<h1><a href="http://127.0.0.1:8000/admin/">If you need to login or register, click this link</a></h1>
+    </div>
+{% endblock %}

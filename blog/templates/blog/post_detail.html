@@ -7,10 +7,30 @@
                 {{ post.published_date }}
             </div>
         {% endif %}
-        {% if user.is_authenticated %}
+        {% if "carl" == username %}
         	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         {% endif %}
+        <button onclick="myFunction()">Try it</button>
+        <script>
+        function myFunction() {
+            var username = post.author;
+            if ( 0 == 0) {
+                document.getElementById("post_list").innerHTML = "Good day";
+           }
+        }
+        </script>
         <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p>Seller username: {{ post.author|linebreaksbr }}</p>
+        <p>User is: {{ user.get_username|linebreaksbr }}</p>
+        {% if user.get_username == post.author %}
+            <p>These are similar</p>
+        {% endif %}
+        <p>Email address: {{ post.email|linebreaksbr }}</p>
+        <p>Academic Subject: {{ post.academic_subject|linebreaksbr }}</p>
+        <p>Published Year: {{ post.year|linebreaksbr }}</p>
+        <p>Price: ${{ post.price|linebreaksbr }}</p>
+        <p>Phone Number: {{ post.phone_number|linebreaksbr }}</p>
+        <p>Additional Comments:</p>
+        <p>{{ post.additional_comment|linebreaksbr }}</p>
     </div>
 {% endblock %}

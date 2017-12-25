@@ -9,6 +9,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 @login_required
 def post_list(request):
@@ -42,16 +44,20 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
-def sign_up(request):
-    if request.method == "POST":
-        form = AdminForm(request.POST)
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            admin = form.save(commit=False)
-            admin.save()
-            return redirect('login')
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
     else:
-        form = AdminForm()
-    return render(request, 'registration/sign_up.html', {'form': form})
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)

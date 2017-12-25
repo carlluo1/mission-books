@@ -57,7 +57,7 @@ def sign_up(request):
             return redirect('home')
     else:
         form = UserCreationForm()
-    return render(request, 'sign_up.html', {'form': form})
+    return render(request, 'registration/sign_up.html', {'form': form})
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)

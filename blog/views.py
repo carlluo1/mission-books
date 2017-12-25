@@ -45,7 +45,7 @@ def post_new(request):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 
-def signup(request):
+def sign_up(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():

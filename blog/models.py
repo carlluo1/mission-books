@@ -12,9 +12,10 @@ class Post(models.Model):
         ('a', 'ACT Test Prep'),
         ('b', 'Study Guide'),
         ('c', 'AP Test Prep'),
-        ('d', 'SAT Test Prep'),
-        ('f', 'Textbook'),
-        ('g', 'Workbook'),
+        ('e', 'SAT Test Prep'),
+        ('f', 'SAT Subject Test Prep'),
+        ('g', 'Textbook'),
+        ('h', 'Workbook'),
     )
     genre = models.CharField(max_length=1, choices=GENRE_TYPE, blank=True,
         default='d', help_text='Select a Genre, do not leave blank')

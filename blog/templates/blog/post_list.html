@@ -17,11 +17,12 @@
 	</form> 
     {% for post in posts %}
         <div class="post">
-            <div class="date">
+          <div class="date">
                 {{ post.published_date }}
-            </div>
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>Email address: {{ post.email|linebreaksbr }}</p>
+          </div>
+          <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+          <p>Seller of Book: {{ post.author|linebreaksbr }}</p>
+          <p>Email address: {{ post.email|linebreaksbr }}</p>
 	        <p>Academic Subject: {{ post.academic_subject|linebreaksbr }}</p>
 	        <p>Published Year: {{ post.year|linebreaksbr }}</p>
 	        <p>Price: ${{ post.price|linebreaksbr }}</p>

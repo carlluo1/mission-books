@@ -25,5 +25,6 @@
         <p>Phone Number: {{ post.phone_number|linebreaksbr }}</p>
         <p>Additional Comments:</p>
         <p>{{ post.additional_comment|linebreaksbr }}</p>
+        <p><a href="{% url 'post_list' %}">Wanna go back to all books?</p>
     </div>
 {% endblock %}

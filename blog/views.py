@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
+from .forms import SearchForm
 from .forms import AdminForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
@@ -16,6 +17,35 @@ from django.contrib.auth.forms import UserCreationForm
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
+
+def blog_search_list_view(request):
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            if post.search_field== 'a':
+                posts = Post.objects.filter(title=post.search_field()).order_by('published_date')
+                return render(request, 'blog/post_list.html', {'posts': posts})
+            if post.search_field== 'b':
+                posts = Post.objects.filter(author=post.search_field()).order_by('published_date')
+                return render(request, 'blog/post_list.html', {'posts': posts})
+            if post.search_field== 'c':
+                posts = Post.objects.filter(genre=post.search_field()).order_by('published_date')
+                return render(request, 'blog/post_list.html', {'posts': posts})
+            if post.search_attribute== 'e':
+                posts = Post.objects.filter(academic_subject=post.search_field).order_by('published_date')
+                return render(request, 'blog/post_list.html', {'posts': posts}) 
+            return redirect('search_list')
+    else:
+        form = SearchForm()
+    return render(request, 'blog/blog_search_list_view.html', {'form': form})
+
+def search_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/search_list.html', {'posts': posts})
 
 def process(request):
     return render(request, 'registration/process.php', {})

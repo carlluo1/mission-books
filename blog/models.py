@@ -41,6 +41,33 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+class SearchForm(models.Model):
+    SEARCH_TYPE = (
+        ('d', 'N/A'),
+        ('a', 'Title'),
+        ('b', 'Seller'),
+        ('c', 'Book_Type'),
+        ('e', 'Academic_Subject'),
+    )
+    search_attribute = models.CharField(max_length=1, choices=SEARCH_TYPE, blank=True,
+        default='d', help_text='Select a search type, do not leave blank')
+    search_field = models.CharField(max_length=255,
+        help_text='e.x Biology', null=True)
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)
+    class Meta:
+        ordering = ["created_date", "published_date"]
+        
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+    def getsearch_field(self):
+        return self.search_field
+    def __str__(self):
+        return self.search_attribute
+    
 class Genre(models.Model):
     """
     Model representing a book genre (e.g. Science Fiction, Non Fiction).

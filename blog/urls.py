@@ -2,7 +2,9 @@ from django.conf.urls import url
 from . import views
 urlpatterns = [
     url(r'^post_list/$', views.post_list, name='post_list'),
+    url(r'^search_list/$', views.search_list, name='search_list'),
     url(r'^sign_up/$', views.sign_up, name='sign_up'),
+    url(r'^blog_search_list_view/$', views.blog_search_list_view, name='blog_search_list_view'),
     url(r'^sign_up/process.php$', views.process, name='process'),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
